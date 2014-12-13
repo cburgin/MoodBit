@@ -2,18 +2,24 @@ package com.moodbit.moodbit;
 
 // Main activity for Mobile device
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private TextView mTestText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTestText = (TextView)findViewById(R.id.testView);
     }
 
 
@@ -37,5 +43,11 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendTestNotification(View notused)
+    {
+        Intent intent = new Intent(this, Notification.class);
+        startActivity(intent);
     }
 }
