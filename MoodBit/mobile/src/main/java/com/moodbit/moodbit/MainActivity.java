@@ -2,9 +2,14 @@ package com.moodbit.moodbit;
 
 // Main activity for Mobile device
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +24,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTestText = (TextView)findViewById(R.id.testView);
+        addGraphFragment();
+        addMenuFragment();
     }
 
 
@@ -49,5 +55,36 @@ public class MainActivity extends ActionBarActivity {
     {
         Intent intent = new Intent(this, Notification.class);
         startActivity(intent);
+    }
+
+    public void addGraphFragment()
+    {
+        // Create new fragment and transaction
+        Fragment newFragment = new Graph();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.topFragment1, newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
+        Log.d("moodbit", "new fragment committed");
+    }
+    public void addMenuFragment()
+    {
+        // Create new fragment and transaction
+        Fragment newFragment = new MoodBitMenu();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.topFragment2, newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
+        Log.d("moodbit", "new fragment committed");
     }
 }
